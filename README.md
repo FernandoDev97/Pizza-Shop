@@ -1,1 +1,1 @@
-# 🍕 pizza.shop API
+# 🍕 pizza.shop WEB
