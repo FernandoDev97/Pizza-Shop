@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
@@ -22,6 +23,7 @@ export const Orders = () => {
   const orderId = searchParams.get('orderId')
   const customerName = searchParams.get('customerName')
   const status = searchParams.get('status')
+  const pageCurrent = searchParams.get('page')
 
   const pageIndex = z.coerce
     .number()
@@ -46,6 +48,16 @@ export const Orders = () => {
       return state
     })
   }
+
+  useEffect(() => {
+    if (!pageCurrent || pageCurrent === '0') {
+      setSearchParams((state) => {
+        state.set('page', '1')
+
+        return state
+      })
+    }
+  }, [pageCurrent, setSearchParams])
 
   return (
     <>
